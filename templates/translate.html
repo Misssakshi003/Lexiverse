@@ -1,0 +1,1112 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Lexiverse - Translate</title>
+    <style>
+      body {
+        background: linear-gradient(
+          to right top,
+          #ffff,
+          #f3f5fa,
+          #eaeffa,
+          #e2ebfd
+        );
+        height: 100vh;
+      }
+
+      .navbar {
+        background-color: #e2ebfd;
+      }
+
+      .cont {
+        min-height: 80vh;
+        background-color: transparent;
+        padding-top: 5px;
+        border-radius: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .input-bar {
+        background-color: #afd3d391;
+        height: 40px;
+        min-width: inherit;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        border-radius: 20px;
+      }
+
+      .options {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+      }
+
+      #inp {
+        width: 90%;
+        background-color: transparent;
+        border-radius: 20px;
+        border: none;
+        outline: none;
+        height: 40px;
+      }
+
+      .my-btn {
+        background: #c6d3d3;
+        border-radius: 12px;
+        outline: none;
+        border: none;
+        height: 40px;
+      }
+
+      .translated-cont {
+        /* height: 20vh; */
+        background-color: #6f72717a;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        border-radius: 20px;
+        /* overflow-y: scroll; */
+        /* max-height: 40vh; */
+      }
+
+      .translated-cont h1 {
+        font-size: 33px;
+        color: rgb(0 0 0 / 34%);
+      }
+      .translated-cont p {
+        display: flex;
+        align-items: center;
+        font-size: 20px;
+        justify-content: center;
+      }
+
+      .option {
+        border-radius: 12px;
+        background-color: #59c4c494;
+      }
+
+      .my-btn:hover {
+        outline: 0.5px solid rgb(41, 40, 40);
+      }
+
+      .navbar-toggler-icon {
+        background-color: transparent;
+      }
+
+      .file-inp {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+      }
+
+      #file {
+        display: none;
+      }
+
+      #lab {
+        height: 40px;
+        border-radius: 12px;
+        border: 1px dashed black;
+        cursor: pointer;
+      }
+
+      #lab:hover {
+        border: 1px solid black;
+        background-color: #59c4c4;
+      }
+
+      *::-webkit-scrollbar {
+        display: none;
+      }
+    </style>
+    <link
+      rel="shortcut icon"
+      href="/images/logo_white.png"
+      type="image/x-icon"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+  </head>
+
+  <body>
+    <header>
+      <nav class="navbar navbar-expand-lg navbar-light px-4">
+        <a class="navbar-brand" href="/index"
+          ><img src="/images/logo.png" width="50" alt=""
+        /></a>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="/index">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/about">About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/contact">Contact</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+    <div class="container shadow cont mt-4">
+      <div class="container input-bar">
+        <input type="text" id="inp" />
+        <button id="start" class="btn">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            fill="black"
+            class="bi bi-mic-fill"
+            viewBox="0 0 16 16"
+          >
+            <path d="M5 3a3 3 0 0 1 6 0v5a3 3 0 0 1-6 0V3z" />
+            <path
+              d="M3.5 6.5A.5.5 0 0 1 4 7v1a4 4 0 0 0 8 0V7a.5.5 0 0 1 1 0v1a5 5 0 0 1-4.5 4.975V15h3a.5.5 0 0 1 0 1h-7a.5.5 0 0 1 0-1h3v-2.025A5 5 0 0 1 3 8V7a.5.5 0 0 1 .5-.5z"
+            />
+          </svg>
+        </button>
+        <button id="send" class="btn">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            fill="black"
+            class="bi bi-send"
+            viewBox="0 0 16 16"
+          >
+            <path
+              d="M15.854.146a.5.5 0 0 1 .11.54l-5.819 14.547a.75.75 0 0 1-1.329.124l-3.178-4.995L.643 7.184a.75.75 0 0 1 .124-1.33L15.314.037a.5.5 0 0 1 .54.11ZM6.636 10.07l2.761 4.338L14.13 2.576 6.636 10.07Zm6.787-8.201L1.591 6.602l4.339 2.76 7.494-7.493Z"
+            />
+          </svg>
+        </button>
+      </div>
+      <div class="container options m-2 p-2">
+        <button id="trans-btn" class="my-btn mx-2 p-2">Translate</button>
+        <select
+          class="my-btn mx-2 p-2"
+          name="language"
+          id="select-translate-lang"
+        >
+          <option class="option" value="">Select Language</option>
+          <option class="option" value="afrikaans">Afrikaans</option>
+          <option class="option" value="arabic">Arabic</option>
+          <option class="option" value="armenian">Armenian</option>
+          <option class="option" value="azerbaijani">Azerbaijani</option>
+          <option class="option" value="belarusian">Belarusian</option>
+          <option class="option" value="bosnian">Bosnian</option>
+          <option class="option" value="bulgarian">Bulgarian</option>
+          <option class="option" value="catalan">Catalan</option>
+          <option class="option" value="chinese">Chinese</option>
+          <option class="option" value="croatian">Croatian</option>
+          <option class="option" value="czech">Czech</option>
+          <option class="option" value="danish">Danish</option>
+          <option class="option" value="dutch">Dutch</option>
+          <option class="option" value="english">English</option>
+          <option class="option" value="estonian">Estonian</option>
+          <option class="option" value="finnish">Finnish</option>
+          <option class="option" value="french">French</option>
+          <option class="option" value="galician">Galician</option>
+          <option class="option" value="german">German</option>
+          <option class="option" value="greek">Greek</option>
+          <option class="option" value="hebrew">Hebrew</option>
+          <option class="option" value="hindi">Hindi</option>
+          <option class="option" value="hungarian">Hungarian</option>
+          <option class="option" value="icelandic">Icelandic</option>
+          <option class="option" value="indonesian">Indonesian</option>
+          <option class="option" value="italian">Italian</option>
+          <option class="option" value="japanese">Japanese</option>
+          <option class="option" value="kannada">Kannada</option>
+          <option class="option" value="kazakh">Kazakh</option>
+          <option class="option" value="korean">Korean</option>
+          <option class="option" value="latvian">Latvian</option>
+          <option class="option" value="lithuanian">Lithuanian</option>
+          <option class="option" value="macedonian">Macedonian</option>
+          <option class="option" value="malay">Malay</option>
+          <option class="option" value="marathi">Marathi</option>
+          <option class="option" value="maori">Maori</option>
+          <option class="option" value="nepali">Nepali</option>
+          <option class="option" value="norwegian">Norwegian</option>
+          <option class="option" value="persian">Persian</option>
+          <option class="option" value="polish">Polish</option>
+          <option class="option" value="portuguese">Portuguese</option>
+          <option class="option" value="romanian">Romanian</option>
+          <option class="option" value="russian">Russian</option>
+          <option class="option" value="serbian">Serbian</option>
+          <option class="option" value="slovak">Slovak</option>
+          <option class="option" value="slovenian">Slovenian</option>
+          <option class="option" value="spanish">Spanish</option>
+          <option class="option" value="swahili">Swahili</option>
+          <option class="option" value="swedish">Swedish</option>
+          <option class="option" value="tagalog">Tagalog</option>
+          <option class="option" value="tamil">Tamil</option>
+          <option class="option" value="thai">Thai</option>
+          <option class="option" value="turkish">Turkish</option>
+          <option class="option" value="ukrainian">Ukrainian</option>
+          <option class="option" value="urdu">Urdu</option>
+          <option class="option" value="vietnamese">Vietnamese</option>
+          <option class="option" value="welsh">Welsh</option>
+        </select>
+      </div>
+      <div id="translated-speech-cont" class="container translated-cont">
+        <h1 id="pre-translate-fetch">
+          Translated text of your speech will lorem be displayed here.
+        </h1>
+        <p id="translated" class="pt-3"></p>
+        <button
+          class="btn"
+          style="display: none"
+          id="translated-speak"
+          onclick="speaktranslated()"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            height="24"
+            viewBox="0 -960 960 960"
+            width="24"
+          >
+            <path
+              d="M560-131v-82q90-26 145-100t55-168q0-94-55-168T560-749v-82q124 28 202 125.5T840-481q0 127-78 224.5T560-131ZM120-360v-240h160l200-200v640L280-360H120Zm440 40v-322q47 22 73.5 66t26.5 96q0 51-26.5 94.5T560-320ZM400-606l-86 86H200v80h114l86 86v-252ZM300-480Z"
+            />
+          </svg>
+        </button>
+        <svg
+          id="loadingtranslatedGif"
+          xmlns="http://www.w3.org/2000/svg"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          style="margin: auto; background: #ffffff00; display: none"
+          width="50px"
+          height="50px"
+          viewBox="0 0 100 100"
+          preserveAspectRatio="xMidYMid"
+        >
+          <g transform="rotate(0 50 50)">
+            <rect
+              x="47"
+              y="24"
+              rx="3"
+              ry="6"
+              width="6"
+              height="12"
+              fill="#000000"
+            >
+              <animate
+                attributeName="opacity"
+                values="1;0"
+                keyTimes="0;1"
+                dur="1s"
+                begin="-0.9166666666666666s"
+                repeatCount="indefinite"
+              ></animate>
+            </rect>
+          </g>
+          <g transform="rotate(30 50 50)">
+            <rect
+              x="47"
+              y="24"
+              rx="3"
+              ry="6"
+              width="6"
+              height="12"
+              fill="#000000"
+            >
+              <animate
+                attributeName="opacity"
+                values="1;0"
+                keyTimes="0;1"
+                dur="1s"
+                begin="-0.8333333333333334s"
+                repeatCount="indefinite"
+              ></animate>
+            </rect>
+          </g>
+          <g transform="rotate(60 50 50)">
+            <rect
+              x="47"
+              y="24"
+              rx="3"
+              ry="6"
+              width="6"
+              height="12"
+              fill="#000000"
+            >
+              <animate
+                attributeName="opacity"
+                values="1;0"
+                keyTimes="0;1"
+                dur="1s"
+                begin="-0.75s"
+                repeatCount="indefinite"
+              ></animate>
+            </rect>
+          </g>
+          <g transform="rotate(90 50 50)">
+            <rect
+              x="47"
+              y="24"
+              rx="3"
+              ry="6"
+              width="6"
+              height="12"
+              fill="#000000"
+            >
+              <animate
+                attributeName="opacity"
+                values="1;0"
+                keyTimes="0;1"
+                dur="1s"
+                begin="-0.6666666666666666s"
+                repeatCount="indefinite"
+              ></animate>
+            </rect>
+          </g>
+          <g transform="rotate(120 50 50)">
+            <rect
+              x="47"
+              y="24"
+              rx="3"
+              ry="6"
+              width="6"
+              height="12"
+              fill="#000000"
+            >
+              <animate
+                attributeName="opacity"
+                values="1;0"
+                keyTimes="0;1"
+                dur="1s"
+                begin="-0.5833333333333334s"
+                repeatCount="indefinite"
+              ></animate>
+            </rect>
+          </g>
+          <g transform="rotate(150 50 50)">
+            <rect
+              x="47"
+              y="24"
+              rx="3"
+              ry="6"
+              width="6"
+              height="12"
+              fill="#000000"
+            >
+              <animate
+                attributeName="opacity"
+                values="1;0"
+                keyTimes="0;1"
+                dur="1s"
+                begin="-0.5s"
+                repeatCount="indefinite"
+              ></animate>
+            </rect>
+          </g>
+          <g transform="rotate(180 50 50)">
+            <rect
+              x="47"
+              y="24"
+              rx="3"
+              ry="6"
+              width="6"
+              height="12"
+              fill="#000000"
+            >
+              <animate
+                attributeName="opacity"
+                values="1;0"
+                keyTimes="0;1"
+                dur="1s"
+                begin="-0.4166666666666667s"
+                repeatCount="indefinite"
+              ></animate>
+            </rect>
+          </g>
+          <g transform="rotate(210 50 50)">
+            <rect
+              x="47"
+              y="24"
+              rx="3"
+              ry="6"
+              width="6"
+              height="12"
+              fill="#000000"
+            >
+              <animate
+                attributeName="opacity"
+                values="1;0"
+                keyTimes="0;1"
+                dur="1s"
+                begin="-0.3333333333333333s"
+                repeatCount="indefinite"
+              ></animate>
+            </rect>
+          </g>
+          <g transform="rotate(240 50 50)">
+            <rect
+              x="47"
+              y="24"
+              rx="3"
+              ry="6"
+              width="6"
+              height="12"
+              fill="#000000"
+            >
+              <animate
+                attributeName="opacity"
+                values="1;0"
+                keyTimes="0;1"
+                dur="1s"
+                begin="-0.25s"
+                repeatCount="indefinite"
+              ></animate>
+            </rect>
+          </g>
+          <g transform="rotate(270 50 50)">
+            <rect
+              x="47"
+              y="24"
+              rx="3"
+              ry="6"
+              width="6"
+              height="12"
+              fill="#000000"
+            >
+              <animate
+                attributeName="opacity"
+                values="1;0"
+                keyTimes="0;1"
+                dur="1s"
+                begin="-0.16666666666666666s"
+                repeatCount="indefinite"
+              ></animate>
+            </rect>
+          </g>
+          <g transform="rotate(300 50 50)">
+            <rect
+              x="47"
+              y="24"
+              rx="3"
+              ry="6"
+              width="6"
+              height="12"
+              fill="#000000"
+            >
+              <animate
+                attributeName="opacity"
+                values="1;0"
+                keyTimes="0;1"
+                dur="1s"
+                begin="-0.08333333333333333s"
+                repeatCount="indefinite"
+              ></animate>
+            </rect>
+          </g>
+          <g transform="rotate(330 50 50)">
+            <rect
+              x="47"
+              y="24"
+              rx="3"
+              ry="6"
+              width="6"
+              height="12"
+              fill="#000000"
+            >
+              <animate
+                attributeName="opacity"
+                values="1;0"
+                keyTimes="0;1"
+                dur="1s"
+                begin="0s"
+                repeatCount="indefinite"
+              ></animate>
+            </rect>
+          </g>
+        </svg>
+        <!-- <p style="font-size: 20px; margin-top: 5px">
+          . Lorem ipsum
+          dolor sit amet consectetur, adipisicing elit. Animi, aliquid neque
+          magni, libero itaque minima debitis repudiandae voluptates beatae,
+          tempore eos nemo sequi adipisci. Dignissimos reiciendis, est commodi
+          voluptate maxime laborum! Soluta cupiditate maiores atque?
+          Necessitatibus ipsum aliquid animi nesciunt, repudiandae quos numquam
+          aliquam est.sapiente.
+        </p> -->
+      </div>
+      <div class="file-inp mx-3">
+        <input type="file" id="file" />
+        <label class="p-2 m-3" for="file" id="lab">Upload File</label>
+        <button class="my-btn" id="submit-file">Submit</button>
+      </div>
+      <div id="transcribed-speech-cont" class="container translated-cont mb-4">
+        <h1 id="pre-fetch">
+          Transcribed text of your mp3 file will be displayed here.
+        </h1>
+        <p id="translated-transcribed" class="pt-3"></p>
+        <button
+          class="btn"
+          style="display: none"
+          id="translated-transcribed-speak"
+          onclick="speaktranscribed()"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            height="24"
+            viewBox="0 -960 960 960"
+            width="24"
+          >
+            <path
+              d="M560-131v-82q90-26 145-100t55-168q0-94-55-168T560-749v-82q124 28 202 125.5T840-481q0 127-78 224.5T560-131ZM120-360v-240h160l200-200v640L280-360H120Zm440 40v-322q47 22 73.5 66t26.5 96q0 51-26.5 94.5T560-320ZM400-606l-86 86H200v80h114l86 86v-252ZM300-480Z"
+            />
+          </svg>
+        </button>
+        <svg
+          id="loadingtranscribedGif"
+          xmlns="http://www.w3.org/2000/svg"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          style="margin: auto; background: #ffffff00; display: none"
+          width="50px"
+          height="50px"
+          viewBox="0 0 100 100"
+          preserveAspectRatio="xMidYMid"
+        >
+          <g transform="rotate(0 50 50)">
+            <rect
+              x="47"
+              y="24"
+              rx="3"
+              ry="6"
+              width="6"
+              height="12"
+              fill="#000000"
+            >
+              <animate
+                attributeName="opacity"
+                values="1;0"
+                keyTimes="0;1"
+                dur="1s"
+                begin="-0.9166666666666666s"
+                repeatCount="indefinite"
+              ></animate>
+            </rect>
+          </g>
+          <g transform="rotate(30 50 50)">
+            <rect
+              x="47"
+              y="24"
+              rx="3"
+              ry="6"
+              width="6"
+              height="12"
+              fill="#000000"
+            >
+              <animate
+                attributeName="opacity"
+                values="1;0"
+                keyTimes="0;1"
+                dur="1s"
+                begin="-0.8333333333333334s"
+                repeatCount="indefinite"
+              ></animate>
+            </rect>
+          </g>
+          <g transform="rotate(60 50 50)">
+            <rect
+              x="47"
+              y="24"
+              rx="3"
+              ry="6"
+              width="6"
+              height="12"
+              fill="#000000"
+            >
+              <animate
+                attributeName="opacity"
+                values="1;0"
+                keyTimes="0;1"
+                dur="1s"
+                begin="-0.75s"
+                repeatCount="indefinite"
+              ></animate>
+            </rect>
+          </g>
+          <g transform="rotate(90 50 50)">
+            <rect
+              x="47"
+              y="24"
+              rx="3"
+              ry="6"
+              width="6"
+              height="12"
+              fill="#000000"
+            >
+              <animate
+                attributeName="opacity"
+                values="1;0"
+                keyTimes="0;1"
+                dur="1s"
+                begin="-0.6666666666666666s"
+                repeatCount="indefinite"
+              ></animate>
+            </rect>
+          </g>
+          <g transform="rotate(120 50 50)">
+            <rect
+              x="47"
+              y="24"
+              rx="3"
+              ry="6"
+              width="6"
+              height="12"
+              fill="#000000"
+            >
+              <animate
+                attributeName="opacity"
+                values="1;0"
+                keyTimes="0;1"
+                dur="1s"
+                begin="-0.5833333333333334s"
+                repeatCount="indefinite"
+              ></animate>
+            </rect>
+          </g>
+          <g transform="rotate(150 50 50)">
+            <rect
+              x="47"
+              y="24"
+              rx="3"
+              ry="6"
+              width="6"
+              height="12"
+              fill="#000000"
+            >
+              <animate
+                attributeName="opacity"
+                values="1;0"
+                keyTimes="0;1"
+                dur="1s"
+                begin="-0.5s"
+                repeatCount="indefinite"
+              ></animate>
+            </rect>
+          </g>
+          <g transform="rotate(180 50 50)">
+            <rect
+              x="47"
+              y="24"
+              rx="3"
+              ry="6"
+              width="6"
+              height="12"
+              fill="#000000"
+            >
+              <animate
+                attributeName="opacity"
+                values="1;0"
+                keyTimes="0;1"
+                dur="1s"
+                begin="-0.4166666666666667s"
+                repeatCount="indefinite"
+              ></animate>
+            </rect>
+          </g>
+          <g transform="rotate(210 50 50)">
+            <rect
+              x="47"
+              y="24"
+              rx="3"
+              ry="6"
+              width="6"
+              height="12"
+              fill="#000000"
+            >
+              <animate
+                attributeName="opacity"
+                values="1;0"
+                keyTimes="0;1"
+                dur="1s"
+                begin="-0.3333333333333333s"
+                repeatCount="indefinite"
+              ></animate>
+            </rect>
+          </g>
+          <g transform="rotate(240 50 50)">
+            <rect
+              x="47"
+              y="24"
+              rx="3"
+              ry="6"
+              width="6"
+              height="12"
+              fill="#000000"
+            >
+              <animate
+                attributeName="opacity"
+                values="1;0"
+                keyTimes="0;1"
+                dur="1s"
+                begin="-0.25s"
+                repeatCount="indefinite"
+              ></animate>
+            </rect>
+          </g>
+          <g transform="rotate(270 50 50)">
+            <rect
+              x="47"
+              y="24"
+              rx="3"
+              ry="6"
+              width="6"
+              height="12"
+              fill="#000000"
+            >
+              <animate
+                attributeName="opacity"
+                values="1;0"
+                keyTimes="0;1"
+                dur="1s"
+                begin="-0.16666666666666666s"
+                repeatCount="indefinite"
+              ></animate>
+            </rect>
+          </g>
+          <g transform="rotate(300 50 50)">
+            <rect
+              x="47"
+              y="24"
+              rx="3"
+              ry="6"
+              width="6"
+              height="12"
+              fill="#000000"
+            >
+              <animate
+                attributeName="opacity"
+                values="1;0"
+                keyTimes="0;1"
+                dur="1s"
+                begin="-0.08333333333333333s"
+                repeatCount="indefinite"
+              ></animate>
+            </rect>
+          </g>
+          <g transform="rotate(330 50 50)">
+            <rect
+              x="47"
+              y="24"
+              rx="3"
+              ry="6"
+              width="6"
+              height="12"
+              fill="#000000"
+            >
+              <animate
+                attributeName="opacity"
+                values="1;0"
+                keyTimes="0;1"
+                dur="1s"
+                begin="0s"
+                repeatCount="indefinite"
+              ></animate>
+            </rect>
+          </g>
+        </svg>
+      </div>
+      <div class="container options m-2 p-2">
+        <button id="translate-transcribed-btn" class="my-btn mx-2 p-2">
+          Translate
+        </button>
+        <select
+          class="my-btn mx-2 p-2"
+          name="language"
+          id="slect-translate-transcribed-lang"
+        >
+          <option class="option" value="">Select Language</option>
+          <option class="option" value="afrikaans">Afrikaans</option>
+          <option class="option" value="arabic">Arabic</option>
+          <option class="option" value="armenian">Armenian</option>
+          <option class="option" value="azerbaijani">Azerbaijani</option>
+          <option class="option" value="belarusian">Belarusian</option>
+          <option class="option" value="bosnian">Bosnian</option>
+          <option class="option" value="bulgarian">Bulgarian</option>
+          <option class="option" value="catalan">Catalan</option>
+          <option class="option" value="chinese">Chinese</option>
+          <option class="option" value="croatian">Croatian</option>
+          <option class="option" value="czech">Czech</option>
+          <option class="option" value="danish">Danish</option>
+          <option class="option" value="dutch">Dutch</option>
+          <option class="option" value="english">English</option>
+          <option class="option" value="estonian">Estonian</option>
+          <option class="option" value="finnish">Finnish</option>
+          <option class="option" value="french">French</option>
+          <option class="option" value="galician">Galician</option>
+          <option class="option" value="german">German</option>
+          <option class="option" value="greek">Greek</option>
+          <option class="option" value="hebrew">Hebrew</option>
+          <option class="option" value="hindi">Hindi</option>
+          <option class="option" value="hungarian">Hungarian</option>
+          <option class="option" value="icelandic">Icelandic</option>
+          <option class="option" value="indonesian">Indonesian</option>
+          <option class="option" value="italian">Italian</option>
+          <option class="option" value="japanese">Japanese</option>
+          <option class="option" value="kannada">Kannada</option>
+          <option class="option" value="kazakh">Kazakh</option>
+          <option class="option" value="korean">Korean</option>
+          <option class="option" value="latvian">Latvian</option>
+          <option class="option" value="lithuanian">Lithuanian</option>
+          <option class="option" value="macedonian">Macedonian</option>
+          <option class="option" value="malay">Malay</option>
+          <option class="option" value="marathi">Marathi</option>
+          <option class="option" value="maori">Maori</option>
+          <option class="option" value="nepali">Nepali</option>
+          <option class="option" value="norwegian">Norwegian</option>
+          <option class="option" value="persian">Persian</option>
+          <option class="option" value="polish">Polish</option>
+          <option class="option" value="portuguese">Portuguese</option>
+          <option class="option" value="romanian">Romanian</option>
+          <option class="option" value="russian">Russian</option>
+          <option class="option" value="serbian">Serbian</option>
+          <option class="option" value="slovak">Slovak</option>
+          <option class="option" value="slovenian">Slovenian</option>
+          <option class="option" value="spanish">Spanish</option>
+          <option class="option" value="swahili">Swahili</option>
+          <option class="option" value="swedish">Swedish</option>
+          <option class="option" value="tagalog">Tagalog</option>
+          <option class="option" value="tamil">Tamil</option>
+          <option class="option" value="thai">Thai</option>
+          <option class="option" value="turkish">Turkish</option>
+          <option class="option" value="ukrainian">Ukrainian</option>
+          <option class="option" value="urdu">Urdu</option>
+          <option class="option" value="vietnamese">Vietnamese</option>
+          <option class="option" value="welsh">Welsh</option>
+        </select>
+      </div>
+    </div>
+    <script src="https://code.responsivevoice.org/responsivevoice.js?key=6RO7j7Nf"></script>
+    <script>
+      let speech = true;
+      let send = document.getElementById("send");
+      let inp = document.getElementById("inp");
+      let btn = document.getElementById("submit-file");
+      let translateselect = document.getElementById("select-translate-lang");
+      let translatetranscribedselect = document.getElementById(
+        "slect-translate-transcribed-lang"
+      );
+      let translatelang = "";
+      let translatetranscribedlang = "";
+      let globalTranscript;
+      window.SpeechRecognition =
+        window.SpeechRecognition || window.webkitSpeechRecognition;
+      const recognition = new SpeechRecognition();
+      recognition.interimResults = true;
+      recognition.addEventListener("result", (e) => {
+        const transcript = Array.from(e.results)
+          .map((result) => result[0])
+          .map((result) => result.transcript)
+          .join("");
+
+        globalTranscript = transcript;
+      });
+
+      console.log(globalTranscript);
+
+      translateselect.addEventListener("change", () => {
+        translatelang =
+          translateselect.options[translateselect.selectedIndex].value;
+      });
+
+      translatetranscribedselect.addEventListener("change", () => {
+        translatetranscribedlang =
+          translatetranscribedselect.options[
+            translatetranscribedselect.selectedIndex
+          ].value;
+      });
+
+      async function postData(url = "", data = {}) {
+        // Default options are marked with *
+        const response = await fetch(url, {
+          method: "post",
+          mode: "cors", // no-cors, *cors, same-origin
+          cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+          credentials: "same-origin", // include, *same-origin, omit
+          headers: {
+            "Content-Type": "application/json",
+            // 'Content-Type': 'application/x-www-form-urlencoded',
+          },
+          redirect: "follow", // manual, *follow, error
+          referrerPolicy: "no-referrer", // *GET, POST, PUT, DELETE, etc.
+          body: JSON.stringify(data), // body data type must match "Content-Type" header
+        });
+        return response.json(); // parses JSON response into native JavaScript objects
+      }
+
+      const populatetranslateUsingGpt = async (input, lang) => {
+        var h = document.getElementById("pre-translate-fetch");
+        var gif = document.getElementById("loadingtranslatedGif");
+        var p = document.getElementById("translated");
+        var speak = document.getElementById("translated-speak");
+        h.style.display = "none";
+        p.innerHTML = "";
+        speak.style.display = "none";
+        gif.style.display = "block";
+        await postData("/translate", { input: input, lang: lang }).then(
+          (data) => {
+            gif.style.display = "none";
+            console.log(data.message);
+            p.innerHTML = data.message;
+            speak.style.display = "block";
+          }
+        );
+      };
+
+      async function populatetranslatedtranscribeUsingGpt() {
+        var h = document.getElementById("pre-fetch");
+        var btn = document.getElementById("translated-transcribed-speak");
+        var p = document.getElementById("translated-transcribed");
+        var inp = p.innerHTML;
+        var gif = document.getElementById("loadingtranscribedGif");
+        p.innerHTML = "";
+        h.style.display = "none";
+        btn.style.display = "none";
+        gif.style.display = "block";
+        await postData("/translate", {
+          input: inp,
+          lang: translatetranscribedlang,
+        }).then((data) => {
+          gif.style.display = "none";
+          console.log(data.message);
+          p.innerHTML = data.message;
+          btn.style.display = "block";
+        });
+      }
+
+      async function populatetranscribeUsingGpt() {
+        var inpfile = document.getElementById("file");
+        var h = document.getElementById("pre-fetch");
+        var btn = document.getElementById("translated-transcribed-speak");
+        var p = document.getElementById("translated-transcribed");
+        var gif = document.getElementById("loadingtranscribedGif");
+        const file = inpfile.files[0];
+        p.innerHTML = "";
+        h.style.display = "none";
+        gif.style.display = "block";
+        btn.style.display = "none";
+        if (file) {
+          const formData = new FormData();
+          formData.append("audio", file);
+          await fetch("/translate/transcribe", {
+            method: "POST",
+            body: formData,
+          })
+            .then((response) => response.json())
+            .then((data) => {
+              gif.style.display = "none";
+              p.innerHTML = `${data.message}`;
+              btn.style.display = "block";
+              console.log("Server Response: ", data.message);
+            })
+            .catch((error) => {
+              console.log("Error: ", error);
+            });
+        } else {
+          console.log("No file chosen");
+        }
+      }
+
+      document
+        .getElementById("submit-file")
+        .addEventListener("click", async () => {
+          await populatetranscribeUsingGpt();
+        });
+
+      document
+        .getElementById("translate-transcribed-btn")
+        .addEventListener("click", async () => {
+          await populatetranslatedtranscribeUsingGpt();
+        });
+
+      document.getElementById("start").addEventListener("click", () => {
+        if (speech == true) {
+          recognition.start();
+          recognition.addEventListener("end", () => {
+            console.log(globalTranscript);
+            if (globalTranscript !== "") {
+              var inp = document.getElementById("inp");
+              inp.value = globalTranscript;
+            }
+            globalTranscript = "";
+          });
+        }
+        return;
+      });
+
+      document.getElementById("start").addEventListener("keyup", (e) => {
+        if (e.keyCode == 13) {
+          var text = inp.value;
+          populatetranslateUsingGpt(text, translatelang);
+        }
+      });
+
+      inp.addEventListener("keyup", (e) => {
+        if (e.keyCode == 13) {
+          var text = inp.value;
+          populatetranslateUsingGpt(text, translatelang);
+        }
+      });
+
+      document.getElementById("trans-btn").addEventListener("click", () => {
+        var text = inp.value;
+        populatetranslateUsingGpt(text, translatelang);
+      });
+
+      send.addEventListener("click", () => {
+        var text = inp.value;
+        populatetranslateUsingGpt(text, translatelang);
+      });
+      function speaktranscribed() {
+        var p = document.getElementById("translated-transcribed");
+        if (window.responsiveVoice && responsiveVoice.voiceSupport()) {
+          // Use ResponsiveVoice to speak the text
+          responsiveVoice.speak(p.innerHTML);
+        } else {
+          alert(
+            "Sorry, text-to-speech is not supported in your browser or API key is missing."
+          );
+        }
+      }
+      function speaktranslated() {
+        var p = document.getElementById("translated");
+        if (window.responsiveVoice && responsiveVoice.voiceSupport()) {
+          // Use ResponsiveVoice to speak the text
+          responsiveVoice.speak(p.innerHTML);
+        } else {
+          alert(
+            "Sorry, text-to-speech is not supported in your browser or API key is missing."
+          );
+        }
+      }
+    </script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+      integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

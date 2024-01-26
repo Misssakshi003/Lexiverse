@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Lexiverse - Image</title>
+    <style>
+      .navbar {
+        background-color: #e2ebfd;
+      }
+
+      body {
+        background: linear-gradient(
+          to right top,
+          #ffff,
+          #f3f5fa,
+          #eaeffa,
+          #e2ebfd
+        );
+        min-width: 100vw;
+        min-height: 100vh;
+      }
+
+      .cont {
+        min-height: 80vh;
+        background-color: transparent;
+        padding-top: 5px;
+      }
+
+      .input-bar {
+        min-width: inherit;
+        background-color: rgb(185 213 212 / 47%);
+        border-radius: 15px;
+        height: 40px;
+        margin: 0px;
+        padding: 5px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .input-bar input {
+        min-width: 85%;
+        background-color: transparent;
+        outline: none;
+        border: none;
+      }
+
+      .images-container {
+        min-height: 70vh;
+        min-width: inherit;
+        background-color: transparent;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        border-radius: 20px;
+        font-size: 40px;
+        color: #16323285;
+      }
+
+      #images-container {
+        display: flex;
+        flex-direction: row;
+        min-width: inherit;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .image {
+        width: 300px;
+        height: 300px;
+        background-color: transparent;
+        border-radius: 20px;
+        margin: 26px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .image img,
+      .image a {
+        border-radius: 20px;
+        cursor: pointer;
+        margin: 5px 5px;
+      }
+
+      *::-webkit-scrollbar {
+        display: none;
+      }
+    </style>
+    <link
+      rel="shortcut icon"
+      href="/images/logo_white.png"
+      type="image/x-icon"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+  </head>
+
+  <body>
+    <header>
+      <nav class="navbar navbar-expand-lg navbar-light px-4">
+        <a class="navbar-brand" href="/index"
+          ><img src="/images/logo.png" width="50" alt=""
+        /></a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="/index">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/about">About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/contact">Contact</a>
+            </li>
+          </ul>
+          <div
+            style="
+              background-color: transparent;
+              min-width: 67%;
+              min-height: 10px;
+            "
+          ></div>
+          <!-- <a class="btn">
+            <div class="mx-4">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                fill="currentColor"
+                class="bi bi-clock-history mx-1"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  d="M8.515 1.019A7 7 0 0 0 8 1V0a8 8 0 0 1 .589.022l-.074.997zm2.004.45a7.003 7.003 0 0 0-.985-.299l.219-.976c.383.086.76.2 1.126.342l-.36.933zm1.37.71a7.01 7.01 0 0 0-.439-.27l.493-.87a8.025 8.025 0 0 1 .979.654l-.615.789a6.996 6.996 0 0 0-.418-.302zm1.834 1.79a6.99 6.99 0 0 0-.653-.796l.724-.69c.27.285.52.59.747.91l-.818.576zm.744 1.352a7.08 7.08 0 0 0-.214-.468l.893-.45a7.976 7.976 0 0 1 .45 1.088l-.95.313a7.023 7.023 0 0 0-.179-.483zm.53 2.507a6.991 6.991 0 0 0-.1-1.025l.985-.17c.067.386.106.778.116 1.17l-1 .025zm-.131 1.538c.033-.17.06-.339.081-.51l.993.123a7.957 7.957 0 0 1-.23 1.155l-.964-.267c.046-.165.086-.332.12-.501zm-.952 2.379c.184-.29.346-.594.486-.908l.914.405c-.16.36-.345.706-.555 1.038l-.845-.535zm-.964 1.205c.122-.122.239-.248.35-.378l.758.653a8.073 8.073 0 0 1-.401.432l-.707-.707z"
+                />
+                <path
+                  d="M8 1a7 7 0 1 0 4.95 11.95l.707.707A8.001 8.001 0 1 1 8 0v1z"
+                />
+                <path
+                  d="M7.5 3a.5.5 0 0 1 .5.5v5.21l3.248 1.856a.5.5 0 0 1-.496.868l-3.5-2A.5.5 0 0 1 7 9V3.5a.5.5 0 0 1 .5-.5z"
+                />
+              </svg>
+              History
+            </div>
+          </a> -->
+        </div>
+      </nav>
+    </header>
+    <div class="container mt-3 cont">
+      <div class="input-bar">
+        <input
+          id="prompt"
+          placeholder="Just Click on Mic button and give the voice command"
+          type="text"
+        />
+        <button id="start" class="btn mx-1">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            fill="black"
+            class="bi bi-mic-fill"
+            viewBox="0 0 16 16"
+          >
+            <path d="M5 3a3 3 0 0 1 6 0v5a3 3 0 0 1-6 0V3z" />
+            <path
+              d="M3.5 6.5A.5.5 0 0 1 4 7v1a4 4 0 0 0 8 0V7a.5.5 0 0 1 1 0v1a5 5 0 0 1-4.5 4.975V15h3a.5.5 0 0 1 0 1h-7a.5.5 0 0 1 0-1h3v-2.025A5 5 0 0 1 3 8V7a.5.5 0 0 1 .5-.5z"
+            />
+          </svg>
+        </button>
+        <button id="send" class="btn mx-1">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            fill="black"
+            class="bi bi-send"
+            viewBox="0 0 16 16"
+          >
+            <path
+              d="M15.854.146a.5.5 0 0 1 .11.54l-5.819 14.547a.75.75 0 0 1-1.329.124l-3.178-4.995L.643 7.184a.75.75 0 0 1 .124-1.33L15.314.037a.5.5 0 0 1 .54.11ZM6.636 10.07l2.761 4.338L14.13 2.576 6.636 10.07Zm6.787-8.201L1.591 6.602l4.339 2.76 7.494-7.493Z"
+            />
+          </svg>
+        </button>
+      </div>
+      <div class="images-container shadow mt-3">
+        <div id="pre-fetch">Your Images will be displayed here</div>
+        <div id="fetching" style="display: none">
+          Your Images are getting loaded
+          <svg
+            id="loadingGif"
+            xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+            style="margin: auto; background: #ffffff00; display: block"
+            width="200px"
+            height="200px"
+            viewBox="0 0 100 100"
+            preserveAspectRatio="xMidYMid"
+          >
+            <g transform="rotate(0 50 50)">
+              <rect
+                x="47"
+                y="24"
+                rx="3"
+                ry="6"
+                width="6"
+                height="12"
+                fill="#000000"
+              >
+                <animate
+                  attributeName="opacity"
+                  values="1;0"
+                  keyTimes="0;1"
+                  dur="1s"
+                  begin="-0.9166666666666666s"
+                  repeatCount="indefinite"
+                ></animate>
+              </rect>
+            </g>
+            <g transform="rotate(30 50 50)">
+              <rect
+                x="47"
+                y="24"
+                rx="3"
+                ry="6"
+                width="6"
+                height="12"
+                fill="#000000"
+              >
+                <animate
+                  attributeName="opacity"
+                  values="1;0"
+                  keyTimes="0;1"
+                  dur="1s"
+                  begin="-0.8333333333333334s"
+                  repeatCount="indefinite"
+                ></animate>
+              </rect>
+            </g>
+            <g transform="rotate(60 50 50)">
+              <rect
+                x="47"
+                y="24"
+                rx="3"
+                ry="6"
+                width="6"
+                height="12"
+                fill="#000000"
+              >
+                <animate
+                  attributeName="opacity"
+                  values="1;0"
+                  keyTimes="0;1"
+                  dur="1s"
+                  begin="-0.75s"
+                  repeatCount="indefinite"
+                ></animate>
+              </rect>
+            </g>
+            <g transform="rotate(90 50 50)">
+              <rect
+                x="47"
+                y="24"
+                rx="3"
+                ry="6"
+                width="6"
+                height="12"
+                fill="#000000"
+              >
+                <animate
+                  attributeName="opacity"
+                  values="1;0"
+                  keyTimes="0;1"
+                  dur="1s"
+                  begin="-0.6666666666666666s"
+                  repeatCount="indefinite"
+                ></animate>
+              </rect>
+            </g>
+            <g transform="rotate(120 50 50)">
+              <rect
+                x="47"
+                y="24"
+                rx="3"
+                ry="6"
+                width="6"
+                height="12"
+                fill="#000000"
+              >
+                <animate
+                  attributeName="opacity"
+                  values="1;0"
+                  keyTimes="0;1"
+                  dur="1s"
+                  begin="-0.5833333333333334s"
+                  repeatCount="indefinite"
+                ></animate>
+              </rect>
+            </g>
+            <g transform="rotate(150 50 50)">
+              <rect
+                x="47"
+                y="24"
+                rx="3"
+                ry="6"
+                width="6"
+                height="12"
+                fill="#000000"
+              >
+                <animate
+                  attributeName="opacity"
+                  values="1;0"
+                  keyTimes="0;1"
+                  dur="1s"
+                  begin="-0.5s"
+                  repeatCount="indefinite"
+                ></animate>
+              </rect>
+            </g>
+            <g transform="rotate(180 50 50)">
+              <rect
+                x="47"
+                y="24"
+                rx="3"
+                ry="6"
+                width="6"
+                height="12"
+                fill="#000000"
+              >
+                <animate
+                  attributeName="opacity"
+                  values="1;0"
+                  keyTimes="0;1"
+                  dur="1s"
+                  begin="-0.4166666666666667s"
+                  repeatCount="indefinite"
+                ></animate>
+              </rect>
+            </g>
+            <g transform="rotate(210 50 50)">
+              <rect
+                x="47"
+                y="24"
+                rx="3"
+                ry="6"
+                width="6"
+                height="12"
+                fill="#000000"
+              >
+                <animate
+                  attributeName="opacity"
+                  values="1;0"
+                  keyTimes="0;1"
+                  dur="1s"
+                  begin="-0.3333333333333333s"
+                  repeatCount="indefinite"
+                ></animate>
+              </rect>
+            </g>
+            <g transform="rotate(240 50 50)">
+              <rect
+                x="47"
+                y="24"
+                rx="3"
+                ry="6"
+                width="6"
+                height="12"
+                fill="#000000"
+              >
+                <animate
+                  attributeName="opacity"
+                  values="1;0"
+                  keyTimes="0;1"
+                  dur="1s"
+                  begin="-0.25s"
+                  repeatCount="indefinite"
+                ></animate>
+              </rect>
+            </g>
+            <g transform="rotate(270 50 50)">
+              <rect
+                x="47"
+                y="24"
+                rx="3"
+                ry="6"
+                width="6"
+                height="12"
+                fill="#000000"
+              >
+                <animate
+                  attributeName="opacity"
+                  values="1;0"
+                  keyTimes="0;1"
+                  dur="1s"
+                  begin="-0.16666666666666666s"
+                  repeatCount="indefinite"
+                ></animate>
+              </rect>
+            </g>
+            <g transform="rotate(300 50 50)">
+              <rect
+                x="47"
+                y="24"
+                rx="3"
+                ry="6"
+                width="6"
+                height="12"
+                fill="#000000"
+              >
+                <animate
+                  attributeName="opacity"
+                  values="1;0"
+                  keyTimes="0;1"
+                  dur="1s"
+                  begin="-0.08333333333333333s"
+                  repeatCount="indefinite"
+                ></animate>
+              </rect>
+            </g>
+            <g transform="rotate(330 50 50)">
+              <rect
+                x="47"
+                y="24"
+                rx="3"
+                ry="6"
+                width="6"
+                height="12"
+                fill="#000000"
+              >
+                <animate
+                  attributeName="opacity"
+                  values="1;0"
+                  keyTimes="0;1"
+                  dur="1s"
+                  begin="0s"
+                  repeatCount="indefinite"
+                ></animate>
+              </rect>
+            </g>
+          </svg>
+        </div>
+        <div id="images-container"></div>
+      </div>
+    </div>
+    <script>
+      let speech = true;
+      let globalTranscript;
+      window.SpeechRecognition =
+        window.SpeechRecognition || window.webkitSpeechRecognition;
+      const recognition = new SpeechRecognition();
+      recognition.interimResults = true;
+      recognition.addEventListener("result", (e) => {
+        const transcript = Array.from(e.results)
+          .map((result) => result[0])
+          .map((result) => result.transcript)
+          .join("");
+
+        globalTranscript = transcript;
+      });
+      console.log(globalTranscript);
+
+      async function postData(url = "", data = {}) {
+        // Default options are marked with *
+        const response = await fetch(url, {
+          method: "POST", // *GET, POST, PUT, DELETE, etc.
+          mode: "cors", // no-cors, *cors, same-origin
+          cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+          credentials: "same-origin", // include, *same-origin, omit
+          headers: {
+            "Content-Type": "application/json",
+            // 'Content-Type': 'application/x-www-form-urlencoded',
+          },
+          redirect: "follow", // manual, *follow, error
+          referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+          body: JSON.stringify(data), // body data type must match "Content-Type" header
+        });
+        return response.json(); // parses JSON response into native JavaScript objects
+      }
+
+      const populateUsingGpt = (input) => {
+        var gif = document.getElementById("fetching");
+        var prefetch = document.getElementById("pre-fetch");
+        var imgscont = document.getElementById("images-container");
+        imgscont.innerHTML = "";
+        prefetch.style.display = "none";
+        gif.style.display = "block";
+        postData("/image", { input: input }).then((data) => {
+          document.getElementById("prompt").value = `${input}`;
+          if (data.success != true) {
+            prefetch.style.display = "block";
+            gif.style.display = "none";
+            alert(data.message);
+          } else {
+            let totalHTML = "";
+            data.message.forEach((image) => {
+              let html = `
+              <div class="image"><a href="${image.url}" target="_blank"><img src="${image.url}" width="300"></a></div>
+              `;
+              totalHTML += html;
+            });
+            gif.style.display = "none";
+            document.querySelector("#images-container").innerHTML = totalHTML;
+          }
+        });
+      };
+
+      document.getElementById("start").addEventListener("click", () => {
+        if (speech == true) {
+          recognition.start();
+          recognition.addEventListener("end", () => {
+            console.log(globalTranscript);
+            if (globalTranscript !== "") {
+              populateUsingGpt(globalTranscript);
+            }
+            globalTranscript = "";
+          });
+        }
+        return;
+      });
+
+      document.getElementById("send").addEventListener("click", () => {
+        const writtenprompt = document.getElementById("prompt").value;
+        if (writtenprompt !== "") {
+          populateUsingGpt(writtenprompt);
+        }
+      });
+
+      document.getElementById("prompt").addEventListener("keyup", (e) => {
+        if (e.keyCode === 13) {
+          const writtenprompt = document.getElementById("prompt").value;
+          if (writtenprompt !== "") {
+            populateUsingGpt(writtenprompt);
+          }
+        }
+      });
+    </script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+      integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
